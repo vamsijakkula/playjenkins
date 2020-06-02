@@ -18,17 +18,7 @@ pipeline {
             }
         }
     
-      stage('Test image') {
-      steps {
-        script {
-          app.inside { 
-            sh 'echo "Tests passed"'
-          }
-        }
-
-      }
-    }
-        stage("Push image") {
+      stage("Push image") {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
