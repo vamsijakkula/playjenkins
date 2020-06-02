@@ -6,14 +6,14 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git url:'https://github.com/vamsijakkula/playjenkins.git', branch:'master'
+        git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
       }
     }
     
       stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("vamsijakkula/playjenkins:${env.BUILD_ID}")
+                    myapp = docker.build("vamsijakkula/hellowhale:${env.BUILD_ID}")
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "nginx.yml", kubeconfigId: "mykubeconfig")
+          kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
         }
       }
     }
